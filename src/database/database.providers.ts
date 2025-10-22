@@ -8,10 +8,10 @@ export const databaseProviders = [
     useFactory: (config: ConfigService) => {
       const dataSource = new DataSource({
         type: 'postgres',
-        host: config.get('HOST'),
+        host: config.get('HOST') || 'localhost',
         port: +config.get('PORT_DB'), // el + convierte a número
-        username: config.get('USERNAME'),
-        password: config.get('PASSWORD'),
+        username: config.get('USERNAME')||'root',
+        password: config.get('PASSWORD') || 'prueba',
         database: config.get('DATABASE'), // ✅ corregido
       });
 
