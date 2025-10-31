@@ -1,19 +1,17 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Persona } from '../../persona/entities/persona.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
 
-@Entity() 
-export class user {
+@Entity('users')
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  nombre: string;
 
   @Column()
-  email: string;
-  
-  @Column()
   password: string;
-  
-  @Column()
-  direccion: string;
+
+  @OneToOne(()=>Persona,persona=>persona.user,{cascade:true})
+  persona:Persona
 }
