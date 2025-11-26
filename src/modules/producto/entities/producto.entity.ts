@@ -1,26 +1,33 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Categoria } from '../../categoria/entities/categoria.entity';
-import { PedidoProducto } from '../../pedido/entities/pedidoproducto.entity';
+import { PedidoProducto } from "../../pedido/entities/pedidoproducto.entity";
+import { Categoria } from "../../categoria/entities/categoria.entity";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('productos')
 export class Producto {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id:number;
 
-  @Column()
-  nombre: string;
+    @Column({type: 'varchar', length:250})
+    nombre:string;
 
-  @Column()
-  precio: number;
+    @Column({type: 'decimal', precision:10, scale:2})
+    precio:number;
 
-  @Column()
-  stock: number;
+    @Column({type: 'int'})
+    stock:number;
 
-  // Muchos productos pertenecen a una sola categoría
-  @ManyToOne(() => Categoria, categoria => categoria.productos)
-  categoria: Categoria;
+    @Column({type: 'varchar', length:250, nullable:true})
+    image:string;
 
-  // Un producto puede estar en muchos pedidos
-  @OneToMany(() => PedidoProducto, pedprod => pedprod.producto)
-  pedidoProducto: PedidoProducto[];
+    @Column({type: 'text', nullable:true})
+    descripcion:string;
+
+    @Column({type: 'boolean', default:true})
+    estado:boolean;
+
+    @ManyToOne(()=>Categoria, (cat)=>cat.productos)
+    categoria: Categoria
+
+    @ManyToMany(()=>PedidoProducto, predprod => predprod.producto)
+    pedidoProducto: PedidoProducto[];
 }

@@ -1,23 +1,23 @@
-import { Pedido } from './pedido.entity';
-import { Producto } from '../../producto/entities/producto.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Pedido } from "./pedido.entity";
+import { Producto } from "../../producto/entities/producto.entity";
 
-@Entity('pedido_productos')
+@Entity('pedido_producto')
 export class PedidoProducto {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
+@Column()
+pedidoId: number;
 
-  @Column()
-  cantidad: number;
+@Column()
+productoId: number;
 
-  @Column()
-  precio_unitario: number;
+@Column()
+cantidad: number;
 
-  // Muchos registros pertenecen a un solo pedido
-  @ManyToOne(() => Pedido, pedido => pedido.pedidoProducto)
-  pedido: Pedido;
+@ManyToOne(() => Pedido, (ped) => ped.pedidoProducto)
+pedido: Pedido;
 
-  // Muchos registros pertenecen a un solo producto
-  @ManyToOne(() => Producto, producto => producto.pedidoProducto)
-  producto: Producto;
+@ManyToOne(() => Producto, (pro) => pro.pedidoProducto)
+producto: Producto;
 }

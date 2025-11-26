@@ -1,19 +1,19 @@
 import { User } from "../../users/entities/user.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity,JoinColumn,OneToOne, PrimaryGeneratedColumn } from "typeorm";
+
 
 @Entity()
 export class Persona {
     @PrimaryGeneratedColumn()
-    id: number;
+    id:number;
 
     @Column()
-    nombre:string
+    nombre:string;
 
     @Column()
-    apellidos:string
+    apellido:string;
 
-    @OneToOne(()=>User, user=>user.persona)
+    @OneToOne(() => User, user => user.persona)
     @JoinColumn()
-    user:User
-
+    user: User
 }
